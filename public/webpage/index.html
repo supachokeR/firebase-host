@@ -1,11 +1,397 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ฤดีวัลย์ คลินิก - คลินิกเฉพาะทางสูตินรีเวช</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Kanit', 'sans-serif'],
+                    },
+                    colors: {
+                        clinic: {
+                            blue: '#346087',
+                            navy: '#262262',
+                            sky: '#00C0FF',
+                            bright: '#4373FF',
+                            yellow: '#ffde17',
+                            soft: '#f6fbff',
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 18px 45px rgba(38, 34, 98, 0.12)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            letter-spacing: 0;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            transition: opacity .45s ease, visibility .45s ease;
+        }
+
+        #loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .service-thumb,
+        .clinic-card img,
+        .gallery-card img {
+            transition: transform .35s ease;
+        }
+
+        .service-thumb:hover,
+        .clinic-card:hover img,
+        .gallery-card:hover img {
+            transform: scale(1.04);
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
 </head>
-<body>
- <h1>Hello World</h1>   
+<body class="bg-white font-sans text-[#414141]">
+    <div id="loader">
+        <div class="flex flex-col items-center gap-4">
+            <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/cropped-banner-คลินิกฝากครรภ์-02.png" alt="ฤดีวัลย์ คลินิก" class="h-24 w-24 rounded-full object-contain">
+            <div class="h-12 w-12 animate-spin rounded-full border-4 border-clinic-blue border-t-transparent"></div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
+            <a href="#" class="flex items-center gap-3">
+                <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/cropped-banner-คลินิกฝากครรภ์-02.png" alt="Rudeewan Clinic" class="h-16 w-16 object-contain">
+                <div class="leading-tight">
+                    <p class="text-lg font-semibold text-clinic-blue">ฤดีวัลย์ คลินิก</p>
+                    <p class="text-xs font-medium text-slate-500">คลินิกเฉพาะทางสูตินรีเวช</p>
+                </div>
+            </a>
+
+            <nav class="hidden items-center gap-10 text-[15px] font-medium text-clinic-blue lg:flex">
+                <a class="border-b-2 border-clinic-blue pb-1" href="#">Home</a>
+                <a class="transition hover:text-clinic-sky" href="#service">Service</a>
+                <a class="transition hover:text-clinic-sky" href="#blog">Blog</a>
+                <a class="transition hover:text-clinic-sky" href="#contactus">Contact us</a>
+            </nav>
+
+            <a href="tel:0929695987" class="hidden rounded-full bg-clinic-blue px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-clinic-navy md:inline-flex">
+                092 9695987
+            </a>
+
+            <button id="menuToggle" class="rounded-md border border-clinic-blue p-2 text-clinic-blue lg:hidden" aria-label="เมนู" aria-expanded="false" aria-controls="mobileMenu">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h16M4 17h16"/>
+                </svg>
+            </button>
+        </div>
+        <nav id="mobileMenu" class="hidden border-t border-slate-100 bg-white px-4 py-4 text-clinic-blue lg:hidden">
+            <div class="mx-auto flex max-w-6xl flex-col gap-4 text-base font-medium">
+                <a href="#">Home</a>
+                <a href="#service">Service</a>
+                <a href="#blog">Blog</a>
+                <a href="#contactus">Contact us</a>
+                <a href="tel:0929695987" class="rounded-full bg-clinic-blue px-5 py-3 text-center text-white">092 9695987</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bg-white">
+            <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/banner-คลินิกฝากครรภ์-01-scaled.jpg" alt="คลินิกฝากครรภ์ ฤดีวัลย์ คลินิก" class="block w-full">
+        </section>
+
+        <section class="bg-white py-10">
+            <div class="mx-auto grid max-w-5xl grid-cols-2 gap-4 px-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+                <a href="#pregnancy" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-03.png" alt="บริการฝากครรภ์">
+                </a>
+                <a href="#pregnancy" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-04.png" alt="ตรวจครรภ์">
+                </a>
+                <a href="#gynecology" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-05.png" alt="ตรวจภายใน">
+                </a>
+                <a href="#gynecology" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-06.png" alt="มะเร็งปากมดลูก">
+                </a>
+                <a href="#general" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-07.png" alt="วัคซีน">
+                </a>
+                <a href="#general" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-08.png" alt="โรคทั่วไป">
+                </a>
+                <a href="#pregnancy" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-09.png" alt="อัลตราซาวด์">
+                </a>
+                <a href="#gynecology" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-10.png" alt="สูตินรีเวช">
+                </a>
+                <a href="#general" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-11.png" alt="ตรวจสุขภาพ">
+                </a>
+                <a href="#pregnancy" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-12.png" alt="ดูแลคุณแม่">
+                </a>
+                <a href="#gynecology" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-13.png" alt="ดูแลสุขภาพผู้หญิง">
+                </a>
+                <a href="#general" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-14.png" alt="บริการทางการแพทย์">
+                </a>
+                <a href="#pregnancy" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-15.png" alt="แพ็กเกจคุณแม่">
+                </a>
+                <a href="#gynecology" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-16.png" alt="ตรวจสุขภาพสตรี">
+                </a>
+                <a href="#general" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-17.png" alt="บริการสุขภาพ">
+                </a>
+                <a href="#contactus" class="overflow-hidden rounded-2xl bg-white shadow-soft">
+                    <img class="service-thumb h-full w-full object-cover" src="https://rudeewanclinic.com/wp-content/uploads/2024/07/banner-คลินิกฝากครรภ์-18.png" alt="ติดต่อคลินิก">
+                </a>
+            </div>
+
+            <div class="mt-10 text-center">
+                <a href="https://m.me/drdew.obg/" class="inline-flex rounded-full bg-clinic-blue px-10 py-4 text-xl font-medium text-white shadow-soft transition hover:bg-clinic-navy">
+                    ปรึกษาฟรี " คลิก "
+                </a>
+            </div>
+        </section>
+
+        <section id="service" class="bg-white py-16">
+            <div class="mx-auto max-w-6xl px-4 md:px-6">
+                <div class="grid gap-8 md:grid-cols-3">
+                    <article id="pregnancy" class="clinic-card overflow-hidden rounded-[28px] bg-white shadow-soft">
+                        <div class="overflow-hidden">
+                            <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/banner-คลินิกฝากครรภ์-07-scaled.jpg" alt="คลินิกฝากครรภ์สำหรับคุณแม่" class="h-80 w-full object-cover">
+                        </div>
+                        <div class="p-7 text-center">
+                            <h2 class="text-3xl font-medium text-clinic-blue">คลินิกฝากครรภ์สำหรับคุณแม่</h2>
+                            <p class="mt-4 text-lg leading-8 text-slate-600">ตรวจการตั้งครรภ์ ฝากครรภ์ อัลตราซาวด์ และติดตามสุขภาพคุณแม่กับลูกน้อยอย่างใกล้ชิด</p>
+                        </div>
+                    </article>
+
+                    <article id="gynecology" class="clinic-card overflow-hidden rounded-[28px] bg-white shadow-soft">
+                        <div class="overflow-hidden">
+                            <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/banner-คลินิกฝากครรภ์-08-scaled.jpg" alt="คลินิกสูตินรีเวชสำหรับผู้หญิง" class="h-80 w-full object-cover">
+                        </div>
+                        <div class="p-7 text-center">
+                            <h2 class="text-3xl font-medium text-clinic-blue">คลินิกสูตินรีเวชสำหรับผู้หญิง</h2>
+                            <p class="mt-4 text-lg leading-8 text-slate-600">ตรวจภายใน คัดกรองมะเร็งปากมดลูก ดูแลปัญหาสุขภาพสตรี และให้คำปรึกษาอย่างเป็นส่วนตัว</p>
+                        </div>
+                    </article>
+
+                    <article id="general" class="clinic-card overflow-hidden rounded-[28px] bg-white shadow-soft">
+                        <div class="overflow-hidden">
+                            <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/banner-คลินิกฝากครรภ์-09-scaled.jpg" alt="บริการโรคทั่วไป" class="h-80 w-full object-cover">
+                        </div>
+                        <div class="p-7 text-center">
+                            <h2 class="text-3xl font-medium text-clinic-blue">บริการโรคทั่วไป</h2>
+                            <p class="mt-4 text-lg leading-8 text-slate-600">บริการตรวจรักษาโรคทั่วไป วัคซีน และคำแนะนำด้านสุขภาพสำหรับทุกคนในครอบครัว</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white py-12">
+            <div class="mx-auto max-w-5xl px-4 text-center md:px-6">
+                <h2 class="text-4xl font-semibold text-clinic-blue md:text-5xl">ทำไมต้อง</h2>
+                <h3 class="mt-2 text-4xl font-semibold text-clinic-blue md:text-5xl">“ฤดีวัลย์ คลินิก”</h3>
+
+                <div class="mt-12 grid gap-8 md:grid-cols-2">
+                    <div class="rounded-3xl border border-slate-100 bg-white p-8 text-left shadow-soft">
+                        <h4 class="text-2xl font-semibold text-clinic-blue">ดูแลโดยทีมแพทย์ผู้หญิง:</h4>
+                        <p class="mt-3 text-lg leading-8">เราเข้าใจและใส่ใจในความต้องการเฉพาะของคุณผู้หญิงโดยเฉพาะ</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-100 bg-white p-8 text-left shadow-soft">
+                        <h4 class="text-2xl font-semibold text-clinic-blue">บรรยากาศสบายและอบอุ่น:</h4>
+                        <p class="mt-3 text-lg leading-8">คลินิกตกแต่งสะอาด เป็นมิตร และให้ความรู้สึกผ่อนคลายทุกครั้งที่มาใช้บริการ</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-100 bg-white p-8 text-left shadow-soft">
+                        <h4 class="text-2xl font-semibold text-clinic-blue">มาตรฐานความปลอดภัยสูงสุด:</h4>
+                        <p class="mt-3 text-lg leading-8">ใช้เทคโนโลยีและอุปกรณ์ทางการแพทย์ที่ทันสมัย พร้อมมาตรการความปลอดภัยระดับโรงพยาบาล</p>
+                    </div>
+                    <div class="rounded-3xl border border-slate-100 bg-white p-8 text-left shadow-soft">
+                        <h4 class="text-2xl font-semibold text-clinic-blue">บริการด้วยหัวใจ:</h4>
+                        <p class="mt-3 text-lg leading-8">ทีมงานพร้อมให้คำปรึกษาและดูแลด้วยความใส่ใจในทุกขั้นตอน</p>
+                    </div>
+                </div>
+
+                <p class="mx-auto mt-10 max-w-4xl text-center text-xl leading-9 text-slate-700">
+                    ไม่ว่าคุณจะมาตรวจสุขภาพ ฝากครรภ์ หรือปรึกษาปัญหาทางสูตินรีเวช คุณจะได้รับการดูแลที่อบอุ่นและเป็นกันเองเสมอ
+                </p>
+            </div>
+        </section>
+
+        <section id="blog" class="bg-white py-16">
+            <div class="mx-auto max-w-6xl px-4 md:px-6">
+                <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+                    <div class="overflow-hidden rounded-[34px] bg-white shadow-soft">
+                        <img src="https://rudeewanclinic.com/wp-content/uploads/2026/04/หมอดิว-ว.53286-พญ.ศุภฤดีวัลย์-ทองจันทร์.png" alt="พญ.ศุภฤดีวัลย์ ทองจันทร์" class="w-full object-cover">
+                    </div>
+                    <div>
+                        <p class="text-2xl font-semibold text-clinic-blue">พญ.ศุภฤดีวัลย์ ทองจันทร์ (คุณหมอดิว)</p>
+                        <h2 class="mt-3 text-4xl font-semibold leading-tight text-clinic-blue md:text-5xl">Dr. Suparudeewan Thongchan</h2>
+                        <div class="mt-8 space-y-4 text-xl leading-9 text-slate-700">
+                            <p>สูตินรีแพทย์เฉพาะทาง ดูแลสุขภาพสตรีและคุณแม่ตั้งครรภ์ด้วยความละเอียดและเป็นกันเอง</p>
+                            <p>แพทยศาสตรบัณฑิต เกียรตินิยมอันดับ 1 คณะแพทยศาสตร์ มหาวิทยาลัยธรรมศาสตร์</p>
+                            <p>วุฒิบัตรวิชาชีพเวชกรรม สาขาสูติศาสตร์-นรีเวชวิทยา คณะแพทยศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    <div class="gallery-card overflow-hidden rounded-3xl bg-white shadow-soft">
+                        <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/LINE_ALBUM_2023.12.4_๒๔๐๑๐๒_1-768x512.jpg" alt="บรรยากาศคลินิก" class="h-56 w-full object-cover">
+                    </div>
+                    <div class="gallery-card overflow-hidden rounded-3xl bg-white shadow-soft">
+                        <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/LINE_ALBUM_2023.12.4_๒๔๐๑๐๒_25-768x512.jpg" alt="พื้นที่ให้บริการ" class="h-56 w-full object-cover">
+                    </div>
+                    <div class="gallery-card overflow-hidden rounded-3xl bg-white shadow-soft">
+                        <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/LINE_ALBUM_2024.2.23_240611_17-768x512.jpg" alt="ห้องตรวจ" class="h-56 w-full object-cover">
+                    </div>
+                    <div class="gallery-card overflow-hidden rounded-3xl bg-white shadow-soft">
+                        <img src="https://rudeewanclinic.com/wp-content/uploads/2024/06/LINE_ALBUM_2024.2.23_240611_20-768x512.jpg" alt="บรรยากาศภายใน" class="h-56 w-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white py-16">
+            <div class="mx-auto max-w-4xl px-4 md:px-6">
+                <div class="text-center">
+                    <h2 class="text-4xl font-semibold text-clinic-blue">รวมคำถาม</h2>
+                    <h3 class="mt-2 text-3xl font-semibold text-clinic-blue">ตอบครบทุกข้อสงสัย</h3>
+                    <div class="mx-auto mt-5 h-[2px] w-24 bg-black"></div>
+                    <h4 class="mt-10 text-left text-3xl font-semibold text-clinic-blue">คำถามที่พบบ่อย</h4>
+                </div>
+
+                <div class="mt-8 space-y-4">
+                    <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm" open>
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 text-xl font-semibold text-clinic-bright">
+                            ตรวจการตั้งครรภ์ที่ฤดีวัลย์คลินิก มีข้อดีอย่างไร?
+                            <span class="text-clinic-sky">+</span>
+                        </summary>
+                        <p class="mt-4 text-lg leading-8 text-slate-600">มีบริการตรวจการตั้งครรภ์ ฝากครรภ์ ดูแลต่อเนื่อง และช่วยให้คุณแม่ได้รับคำแนะนำอย่างใกล้ชิดโดยไม่ต้องรอคิวนาน</p>
+                    </details>
+                    <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 text-xl font-semibold text-clinic-bright">
+                            ตรวจการตั้งครรภ์เร็วสุดกี่วัน ถึงจะรู้ว่าท้อง?
+                            <span class="text-clinic-sky">+</span>
+                        </summary>
+                        <p class="mt-4 text-lg leading-8 text-slate-600">สามารถตรวจได้เมื่อประจำเดือนผิดปกติหรือมีอาการสงสัยตั้งครรภ์ หากผลขึ้น 2 ขีด ควรเข้ารับการตรวจยืนยันและฝากครรภ์ต่อไป</p>
+                    </details>
+                    <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 text-xl font-semibold text-clinic-bright">
+                            อาการแพ้ท้องที่พบบ่อยมีอะไรบ้าง?
+                            <span class="text-clinic-sky">+</span>
+                        </summary>
+                        <p class="mt-4 text-lg leading-8 text-slate-600">ประจำเดือนไม่มา คลื่นไส้ ไวต่อกลิ่น ปัสสาวะบ่อย อ่อนเพลีย ท้องอืด และคัดตึงเต้านม</p>
+                    </details>
+                    <details class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                        <summary class="flex cursor-pointer items-center justify-between gap-4 text-xl font-semibold text-clinic-bright">
+                            หากไม่เคยตรวจมะเร็งปากมดลูก สามารถฉีดวัคซีน HPV ได้ไหม?
+                            <span class="text-clinic-sky">+</span>
+                        </summary>
+                        <p class="mt-4 text-lg leading-8 text-slate-600">สามารถฉีดได้ แต่หลังฉีดวัคซีนแล้วควรเข้ารับการตรวจคัดกรองตามคำแนะนำของสูตินรีแพทย์</p>
+                    </details>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="https://m.me/drdew.obg/" class="inline-flex rounded-full bg-clinic-blue px-10 py-4 text-xl font-medium text-white shadow-soft transition hover:bg-clinic-navy">อ่านต่อ</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contactus" class="bg-clinic-blue py-14 text-white">
+            <div class="mx-auto max-w-6xl px-4 md:px-6">
+                <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+                    <div>
+                        <h2 class="text-center text-4xl font-semibold md:text-5xl lg:text-left">ติดต่อคลินิก</h2>
+                        <div class="mt-8 space-y-5 text-center text-xl leading-9 lg:text-left">
+                            <p>ฤดีวัลย์คลินิกเฉพาะทางสูตินรีเวช</p>
+                            <p>236 ถนนเลียบคลองรังสิต ตำบลประชาธิปัตย์ อำเภอธัญบุรี จังหวัดปทุมธานี</p>
+                            <div class="rounded-3xl bg-white/10 p-6">
+                                <p class="font-semibold text-clinic-yellow">เวลาเปิดทำการ</p>
+                                <p class="text-clinic-yellow">วันจันทร์ - วันศุกร์ 17.00-20.00</p>
+                                <p class="text-clinic-yellow">วันอาทิตย์ 13.00-19.00</p>
+                                <p class="text-clinic-yellow">หยุดทุกวันเสาร์</p>
+                            </div>
+                            <p>สอบถามหรือนัดหมายได้ที่เบอร์โทรศัพท์ 092-969 5987 หรือทางแชทเพจ ฝากครรภ์รังสิต “ฤดีวัลย์คลินิกเฉพาะทางสูตินรีเวช”</p>
+                            <p class="font-semibold">มาเป็นส่วนหนึ่งของครอบครัวสุขภาพดีที่ “ฤดีวัลย์ คลินิกเฉพาะทางสูตินรีเวช” วันนี้!</p>
+                        </div>
+
+                        <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+                            <a href="tel:0929695987" class="flex-1 rounded-full bg-white px-7 py-4 text-center text-lg font-semibold text-clinic-blue transition hover:bg-clinic-yellow">092 9695987</a>
+                            <a href="https://www.facebook.com/drdew.obg/" class="flex-1 rounded-full border border-white px-7 py-4 text-center text-lg font-semibold text-white transition hover:bg-white hover:text-clinic-blue">Facebook Page</a>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-[28px] bg-white shadow-soft">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.5456721721735!2d100.6262783!3d13.9856272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2815a49c483e9%3A0xdedc0229ecceb922!2z4Lid4Liy4LiB4LiE4Lij4Lij4Lig4LmMIOC4o-C4seC4h-C4quC4tOC4lSAo4Lik4LiU4Li14Lin4Lix4Lil4Lii4LmMIOC4hOC4peC4tOC4meC4tOC4geC4quC4ueC4leC4tOC4meC4o-C4teC5gOC4p-C4iuC5gOC4ieC4nuC4suC4sOC4l-C4suC4hyk!5e0!3m2!1sen!2sth!4v1723205891033!5m2!1sen!2sth" width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="แผนที่ฤดีวัลย์คลินิก"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-8 text-center text-sm font-medium text-slate-500">
+        <p>&copy; 2026 Rudeewan Clinic. All rights reserved.</p>
+    </footer>
+
+    <div class="fixed bottom-7 right-5 z-50 flex flex-col gap-3">
+        <a href="tel:0929695987" class="flex h-14 w-14 items-center justify-center rounded-full bg-clinic-blue text-xs font-semibold text-white shadow-soft transition hover:scale-105">Phone</a>
+        <a href="https://m.me/drdew.obg/" class="flex h-14 w-14 items-center justify-center rounded-full bg-[#0084ff] text-xs font-semibold text-white shadow-soft transition hover:scale-105">MSG</a>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            window.setTimeout(() => {
+                document.getElementById('loader')?.classList.add('fade-out');
+            }, 450);
+        });
+
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle?.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        mobileMenu?.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuToggle?.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
 </body>
 </html>
