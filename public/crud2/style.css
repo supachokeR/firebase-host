@@ -1,0 +1,72 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cbd5e1;
+}
+
+/* Modal Animation */
+#entryModal.hidden {
+    display: none;
+}
+
+#entryModal:not(.hidden) {
+    display: block;
+}
+
+/* Status Pill Variations */
+.status-active {
+    background-color: #ecfdf5;
+    color: #059669;
+}
+
+.status-pending {
+    background-color: #fffbeb;
+    color: #d97706;
+}
+
+.status-inactive {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+/* Transition for Table Rows */
+tbody tr {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Card Hover Effect */
+.customer-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.customer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom Focus Ring */
+input:focus, select:focus {
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
