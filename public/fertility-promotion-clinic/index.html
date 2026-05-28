@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>คลินิกส่งเสริมการมีบุตร | วางแผนมีลูกอย่างมั่นใจ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Noto Sans Thai', 'ui-sans-serif', 'system-ui']
+          },
+          colors: {
+            roseSoft: '#FFF1F2',
+            peach: '#FFE4D6',
+            cream: '#FFF8EF',
+            mintSoft: '#EAF7F0',
+            ink: '#2E2A27'
+          },
+          boxShadow: {
+            soft: '0 20px 60px rgba(168, 85, 247, 0.12)',
+            card: '0 12px 35px rgba(15, 23, 42, 0.08)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Noto Sans Thai', sans-serif; }
+    .glass { background: rgba(255,255,255,.72); backdrop-filter: blur(18px); }
+    .gradient-text { background: linear-gradient(90deg,#be185d,#ea580c,#7c3aed); -webkit-background-clip: text; color: transparent; }
+    .blob { filter: blur(40px); opacity: .45; }
+  </style>
+</head>
+<body class="bg-cream text-ink overflow-x-hidden">
+
+  <!-- Floating Background -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-rose-300 blob"></div>
+    <div class="absolute top-64 -right-24 w-96 h-96 rounded-full bg-orange-200 blob"></div>
+    <div class="absolute bottom-0 left-1/3 w-96 h-96 rounded-full bg-emerald-100 blob"></div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="bg-rose-900 text-white text-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
+      <p>บริการให้คำปรึกษา ตรวจประเมิน และวางแผนการมีบุตรเบื้องต้น</p>
+      <p class="font-medium">โทร: 0XX-XXX-XXXX | LINE: @yourclinic</p>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 glass border-b border-white/60">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-rose-500 to-orange-400 flex items-center justify-center text-white font-bold shadow-card">F</div>
+        <div>
+          <p class="font-extrabold leading-tight">คลินิกส่งเสริมการมีบุตร</p>
+          <p class="text-xs text-slate-500">Fertility Promotion Clinic</p>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700">
+        <a href="#service" class="hover:text-rose-700">บริการ</a>
+        <a href="#journey" class="hover:text-rose-700">ขั้นตอน</a>
+        <a href="#packages" class="hover:text-rose-700">แพ็กเกจ</a>
+        <a href="#prepare" class="hover:text-rose-700">เตรียมตัว</a>
+        <a href="#faq" class="hover:text-rose-700">คำถามที่พบบ่อย</a>
+      </nav>
+      <a href="#booking" class="hidden md:inline-flex px-5 py-3 rounded-full bg-rose-700 text-white font-semibold shadow-card hover:bg-rose-800 transition">นัดปรึกษา</a>
+      <button id="menuBtn" class="lg:hidden p-2 rounded-xl bg-white border">☰</button>
+    </div>
+    <div id="mobileMenu" class="hidden lg:hidden px-4 pb-4">
+      <div class="bg-white rounded-2xl shadow-card p-4 grid gap-3 text-sm font-medium">
+        <a href="#service">บริการ</a>
+        <a href="#journey">ขั้นตอน</a>
+        <a href="#packages">แพ็กเกจ</a>
+        <a href="#prepare">เตรียมตัว</a>
+        <a href="#faq">คำถามที่พบบ่อย</a>
+        <a href="#booking" class="px-4 py-3 rounded-xl bg-rose-700 text-white text-center">นัดปรึกษา</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative pt-16 pb-20 md:pt-24 md:pb-28">
+    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-card text-sm font-semibold text-rose-700 mb-6">
+          <span>🌷</span> สำหรับคู่สมรสที่กำลังวางแผนมีลูก
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+          เริ่มต้นเส้นทาง
+          <span class="gradient-text">การมีบุตร</span>
+          ด้วยการตรวจประเมินที่เข้าใจคุณ
+        </h1>
+        <p class="mt-6 text-lg text-slate-700 leading-8 max-w-2xl">
+          ให้คำปรึกษา ตรวจสุขภาพก่อนตั้งครรภ์ ประเมินภาวะมีบุตรยากเบื้องต้น ตรวจอัลตราซาวด์ ติดตามการตกไข่ และวางแผนช่วงเหมาะสมในการมีบุตร โดยทีมแพทย์และพยาบาลที่ดูแลอย่างเป็นส่วนตัว
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="#booking" class="px-7 py-4 rounded-full bg-rose-700 text-white font-bold text-center shadow-soft hover:bg-rose-800 transition">จองคิวปรึกษา</a>
+          <a href="#service" class="px-7 py-4 rounded-full bg-white text-rose-800 font-bold text-center shadow-card hover:bg-rose-50 transition">ดูบริการทั้งหมด</a>
+        </div>
+        <div class="mt-8 grid grid-cols-3 gap-3 max-w-xl">
+          <div class="bg-white rounded-2xl p-4 shadow-card">
+            <p class="text-2xl font-extrabold text-rose-700">คู่สมรส</p>
+            <p class="text-xs text-slate-500 mt-1">ประเมินทั้งสองฝ่าย</p>
+          </div>
+          <div class="bg-white rounded-2xl p-4 shadow-card">
+            <p class="text-2xl font-extrabold text-orange-600">TVS</p>
+            <p class="text-xs text-slate-500 mt-1">อัลตราซาวด์ภายใน</p>
+          </div>
+          <div class="bg-white rounded-2xl p-4 shadow-card">
+            <p class="text-2xl font-extrabold text-emerald-700">3 รอบ</p>
+            <p class="text-xs text-slate-500 mt-1">ติดตามเป็นระบบ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-br from-rose-200 to-orange-100 rounded-[3rem] rotate-3"></div>
+        <div class="relative bg-white rounded-[2.5rem] shadow-soft p-6 md:p-8 border border-white">
+          <div class="aspect-[4/3] rounded-[2rem] bg-gradient-to-br from-rose-100 via-orange-50 to-emerald-50 flex items-center justify-center overflow-hidden">
+            <div class="text-center px-8">
+              <div class="mx-auto w-24 h-24 rounded-full bg-white flex items-center justify-center text-5xl shadow-card mb-5">👶</div>
+              <h2 class="text-2xl font-extrabold text-rose-800">วางแผนอย่างอบอุ่น</h2>
+              <p class="mt-3 text-slate-600 leading-7">รู้สาเหตุเร็วขึ้น วางแผนชัดขึ้น และส่งต่อเมื่อจำเป็น</p>
+            </div>
+          </div>
+          <div class="mt-5 grid grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-rose-50 p-4">
+              <p class="font-bold">ไม่ทำ IUI/IVF ในคลินิกนี้</p>
+              <p class="text-sm text-slate-600 mt-1">เน้นประเมินและรักษาเบื้องต้น</p>
+            </div>
+            <div class="rounded-2xl bg-mintSoft p-4">
+              <p class="font-bold">ส่งต่อเป็นระบบ</p>
+              <p class="text-sm text-slate-600 mt-1">เมื่อควรพบศูนย์เฉพาะทาง</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who is this for -->
+  <section class="py-16 bg-white/70">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-rose-700 font-bold">เหมาะสำหรับใคร</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">ควรมาปรึกษาเมื่อมีข้อใดข้อหนึ่ง</h2>
+        <p class="mt-4 text-slate-600 leading-8">การพบแพทย์เร็วช่วยให้ทราบปัจจัยที่เกี่ยวข้องและวางแผนได้เหมาะสมกับอายุ สุขภาพ และเป้าหมายของครอบครัว</p>
+      </div>
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <div class="text-3xl mb-4">⏳</div>
+          <h3 class="font-extrabold text-lg">พยายามมีบุตรแล้วยังไม่สำเร็จ</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">โดยเฉพาะนาน 6–12 เดือน หรือมีอายุมากขึ้น</p>
+        </div>
+        <div class="bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <div class="text-3xl mb-4">🌙</div>
+          <h3 class="font-extrabold text-lg">ประจำเดือนผิดปกติ</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">รอบเดือนห่าง ไม่สม่ำเสมอ สงสัยไม่ตกไข่ หรือ PCOS</p>
+        </div>
+        <div class="bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <div class="text-3xl mb-4">🩺</div>
+          <h3 class="font-extrabold text-lg">มีโรคประจำตัว</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">เช่น เบาหวาน ความดัน ไทรอยด์ น้ำหนักเกิน หรือเคยผ่าตัดอุ้งเชิงกราน</p>
+        </div>
+        <div class="bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <div class="text-3xl mb-4">👫</div>
+          <h3 class="font-extrabold text-lg">ต้องการตรวจทั้งคู่</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">ประเมินฝ่ายหญิงและฝ่ายชาย รวมถึงการตรวจน้ำเชื้อผ่านห้องปฏิบัติการคู่สัญญา</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="service" class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <div>
+          <p class="text-rose-700 font-bold">บริการของเรา</p>
+          <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">ดูแลแบบเป็นขั้นตอน ไม่เร่ง ไม่ขายฝัน</h2>
+        </div>
+        <p class="max-w-2xl text-slate-600 leading-8">คลินิกนี้เป็นบริการส่งเสริมการมีบุตรและประเมินภาวะมีบุตรยากเบื้องต้น ยังไม่ให้บริการ IUI/IVF ภายในคลินิก แต่มีระบบสรุปผลและส่งต่อศูนย์เฉพาะทางเมื่อจำเป็น</p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-rose-100 flex items-center justify-center text-2xl">💬</div>
+          <h3 class="mt-5 font-extrabold text-xl">ปรึกษาวางแผนมีบุตร</h3>
+          <p class="mt-3 text-slate-600 leading-7">ซักประวัติ ประเมินความพร้อม ตรวจปัจจัยเสี่ยง และวางแผนแบบเฉพาะคู่สมรส</p>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-orange-100 flex items-center justify-center text-2xl">🔬</div>
+          <h3 class="mt-5 font-extrabold text-xl">ตรวจเลือดและคัดกรองก่อนตั้งครรภ์</h3>
+          <p class="mt-3 text-slate-600 leading-7">ตรวจพื้นฐาน โรคติดเชื้อ ธาลัสซีเมีย ภาวะเสี่ยง และรายการเฉพาะตามข้อบ่งชี้</p>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl">🖥️</div>
+          <h3 class="mt-5 font-extrabold text-xl">อัลตราซาวด์ทางช่องคลอด</h3>
+          <p class="mt-3 text-slate-600 leading-7">ประเมินมดลูก เยื่อบุโพรงมดลูก รังไข่ ถุงน้ำ เนื้องอก และจำนวนฟองไข่เบื้องต้น</p>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-purple-100 flex items-center justify-center text-2xl">🌱</div>
+          <h3 class="mt-5 font-extrabold text-xl">ติดตามการตกไข่</h3>
+          <p class="mt-3 text-slate-600 leading-7">ติดตามขนาด follicle และเยื่อบุโพรงมดลูก เพื่อวางแผนช่วงเหมาะสมในการมีเพศสัมพันธ์</p>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-sky-100 flex items-center justify-center text-2xl">🧬</div>
+          <h3 class="mt-5 font-extrabold text-xl">ตรวจปัจจัยฝ่ายชาย</h3>
+          <p class="mt-3 text-slate-600 leading-7">ให้คำแนะนำการเก็บน้ำเชื้อและส่งตรวจ semen analysis กับห้องปฏิบัติการที่เหมาะสม</p>
+        </article>
+        <article class="bg-white rounded-3xl p-7 shadow-card border border-white hover:-translate-y-1 transition">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 flex items-center justify-center text-2xl">🧭</div>
+          <h3 class="mt-5 font-extrabold text-xl">ส่งต่อศูนย์เฉพาะทาง</h3>
+          <p class="mt-3 text-slate-600 leading-7">หากเข้าเกณฑ์ IUI/IVF จะสรุปผลและแนะนำแนวทางส่งต่ออย่างเหมาะสม</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey -->
+  <section id="journey" class="py-20 bg-white/75">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="max-w-3xl">
+        <p class="text-rose-700 font-bold">ขั้นตอนการรับบริการ</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">จากวันแรกจนถึงแผนดูแล 3 รอบเดือน</h2>
+      </div>
+
+      <div class="mt-10 grid lg:grid-cols-4 gap-5">
+        <div class="relative bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <span class="absolute -top-4 left-6 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-extrabold">1</span>
+          <h3 class="mt-5 font-extrabold text-xl">นัดหมายและกรอกประวัติ</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">กรอกข้อมูลคู่สมรส รอบเดือน โรคประจำตัว และประวัติการมีบุตร</p>
+        </div>
+        <div class="relative bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <span class="absolute -top-4 left-6 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-extrabold">2</span>
+          <h3 class="mt-5 font-extrabold text-xl">พบแพทย์และตรวจอัลตราซาวด์</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">ประเมินสุขภาพฝ่ายหญิง ตรวจภายในตามความเหมาะสม และวางแผนตรวจเพิ่มเติม</p>
+        </div>
+        <div class="relative bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <span class="absolute -top-4 left-6 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-extrabold">3</span>
+          <h3 class="mt-5 font-extrabold text-xl">ตรวจเลือดและตรวจฝ่ายชาย</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">ตรวจตามรายการที่จำเป็น และส่งตรวจน้ำเชื้อเมื่อมีข้อบ่งชี้</p>
+        </div>
+        <div class="relative bg-cream rounded-3xl p-6 shadow-card border border-white">
+          <span class="absolute -top-4 left-6 w-10 h-10 rounded-full bg-rose-700 text-white flex items-center justify-center font-extrabold">4</span>
+          <h3 class="mt-5 font-extrabold text-xl">สรุปผลและเริ่มแผนดูแล</h3>
+          <p class="mt-3 text-sm text-slate-600 leading-7">วางแผนการตกไข่ นัดช่วงเหมาะสม และติดตามผลเป็นรอบเดือน</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini tool -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="text-rose-700 font-bold">เครื่องมือเบื้องต้น</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">ลองคำนวณช่วงที่ควรเริ่มปรึกษา</h2>
+        <p class="mt-4 text-slate-600 leading-8">ข้อมูลนี้เป็นการประเมินเบื้องต้น ไม่แทนการพบแพทย์ โดยเฉพาะหากอายุ 35 ปีขึ้นไป ประจำเดือนผิดปกติ หรือมีโรคประจำตัว ควรปรึกษาเร็วกว่าปกติ</p>
+      </div>
+      <div class="bg-white rounded-[2rem] shadow-soft p-6 md:p-8 border border-white">
+        <label class="block font-bold mb-2">อายุฝ่ายหญิง</label>
+        <input id="ageInput" type="number" min="18" max="55" placeholder="เช่น 34" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" />
+        <label class="block font-bold mt-5 mb-2">พยายามมีบุตรมาแล้วกี่เดือน</label>
+        <input id="monthInput" type="number" min="0" max="120" placeholder="เช่น 8" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" />
+        <button id="checkBtn" class="mt-6 w-full px-5 py-4 rounded-2xl bg-rose-700 text-white font-extrabold hover:bg-rose-800 transition">ประเมินเบื้องต้น</button>
+        <div id="resultBox" class="hidden mt-5 rounded-2xl bg-rose-50 p-5 text-slate-700 leading-7"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section id="packages" class="py-20 bg-white/75">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center max-w-3xl mx-auto">
+        <p class="text-rose-700 font-bold">แพ็กเกจบริการ</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">เลือกตามช่วงเวลาของครอบครัวคุณ</h2>
+        <p class="mt-4 text-slate-600 leading-8">ราคาและรายการตรวจจริงอาจปรับตามอาการ อายุ ผลตรวจเดิม และดุลยพินิจของแพทย์</p>
+      </div>
+      <div class="mt-10 grid lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-[2rem] p-7 shadow-card border border-white">
+          <p class="inline-flex px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm font-bold">เริ่มต้น</p>
+          <h3 class="mt-5 text-2xl font-extrabold">Preconception Check-up</h3>
+          <p class="mt-3 text-slate-600 leading-7">สำหรับคู่ที่กำลังวางแผนมีบุตร ต้องการตรวจความพร้อมก่อนตั้งครรภ์</p>
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li>✓ พบแพทย์และให้คำปรึกษา</li>
+            <li>✓ ตรวจสุขภาพก่อนตั้งครรภ์</li>
+            <li>✓ อัลตราซาวด์ตามความเหมาะสม</li>
+            <li>✓ แนะนำวิตามินและการเตรียมตัว</li>
+          </ul>
+          <a href="#booking" class="mt-7 block text-center px-5 py-3 rounded-2xl bg-emerald-700 text-white font-bold">สนใจแพ็กเกจนี้</a>
+        </div>
+        <div class="bg-rose-900 text-white rounded-[2rem] p-7 shadow-soft border border-rose-800 scale-[1.02]">
+          <p class="inline-flex px-3 py-1 rounded-full bg-white/15 text-white text-sm font-bold">แนะนำ</p>
+          <h3 class="mt-5 text-2xl font-extrabold">Couple Fertility Workup</h3>
+          <p class="mt-3 text-rose-50 leading-7">สำหรับคู่ที่พยายามมีบุตรแล้ว ยังไม่สำเร็จ ต้องการประเมินทั้งสองฝ่าย</p>
+          <ul class="mt-6 space-y-3 text-sm text-rose-50">
+            <li>✓ ประเมินคู่สมรส</li>
+            <li>✓ TVS / AFC</li>
+            <li>✓ ตรวจเลือดตามข้อบ่งชี้</li>
+            <li>✓ ส่งตรวจน้ำเชื้อฝ่ายชาย</li>
+            <li>✓ สรุปแผนดูแลรายบุคคล</li>
+          </ul>
+          <a href="#booking" class="mt-7 block text-center px-5 py-3 rounded-2xl bg-white text-rose-900 font-extrabold">นัดประเมินคู่สมรส</a>
+        </div>
+        <div class="bg-white rounded-[2rem] p-7 shadow-card border border-white">
+          <p class="inline-flex px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-sm font-bold">ติดตามรอบเดือน</p>
+          <h3 class="mt-5 text-2xl font-extrabold">Ovulation & Timed Program</h3>
+          <p class="mt-3 text-slate-600 leading-7">สำหรับผู้ที่ต้องการติดตามไข่ ติดตามรอบเดือน และวางแผนช่วงเหมาะสม</p>
+          <ul class="mt-6 space-y-3 text-sm text-slate-700">
+            <li>✓ ติดตาม follicle</li>
+            <li>✓ ประเมินเยื่อบุโพรงมดลูก</li>
+            <li>✓ วางแผนช่วงมีเพศสัมพันธ์</li>
+            <li>✓ ติดตามผล 1–3 รอบเดือน</li>
+          </ul>
+          <a href="#booking" class="mt-7 block text-center px-5 py-3 rounded-2xl bg-orange-600 text-white font-bold">เริ่มติดตามรอบเดือน</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prepare -->
+  <section id="prepare" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10">
+      <div>
+        <p class="text-rose-700 font-bold">เตรียมตัวก่อนมา</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">เตรียมข้อมูลเหล่านี้ เพื่อให้แพทย์วางแผนได้แม่นขึ้น</h2>
+        <p class="mt-4 text-slate-600 leading-8">หากมีผลตรวจเดิม กรุณานำมาด้วย เช่น ผลเลือด อัลตราซาวด์ ผลตรวจน้ำเชื้อ ประวัติผ่าตัด หรือเอกสารการรักษาจากโรงพยาบาลเดิม</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="bg-white rounded-3xl p-6 shadow-card">
+          <h3 class="font-extrabold">ข้อมูลรอบเดือน</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-7">วันแรกของประจำเดือนครั้งล่าสุด ความยาวรอบเดือน และอาการปวดประจำเดือน</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-card">
+          <h3 class="font-extrabold">ระยะเวลาที่พยายามมีบุตร</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-7">เริ่มพยายามตั้งแต่เมื่อไร ความถี่การมีเพศสัมพันธ์ และเคยใช้ชุดตรวจไข่ตกหรือไม่</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-card">
+          <h3 class="font-extrabold">โรคประจำตัวและยา</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-7">ยาที่ใช้ประจำ โรคเดิม ประวัติแพ้ยา และการผ่าตัดเดิม</p>
+        </div>
+        <div class="bg-white rounded-3xl p-6 shadow-card">
+          <h3 class="font-extrabold">มาพร้อมคู่สมรสถ้าเป็นไปได้</h3>
+          <p class="mt-2 text-sm text-slate-600 leading-7">การประเมินทั้งสองฝ่ายช่วยให้วางแผนได้ครบและลดเวลารอผล</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-white/75">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center">
+        <p class="text-rose-700 font-bold">คำถามที่พบบ่อย</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">ก่อนตัดสินใจมาปรึกษา</h2>
+      </div>
+      <div class="mt-10 space-y-4">
+        <div class="faq-item bg-white rounded-3xl shadow-card overflow-hidden">
+          <button class="faq-btn w-full p-6 text-left font-extrabold flex justify-between gap-4">คลินิกนี้ทำ IUI หรือ IVF หรือไม่?<span>+</span></button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 leading-8">ยังไม่ทำ IUI/IVF ภายในคลินิกนี้ บริการหลักคือการให้คำปรึกษา ตรวจประเมินภาวะมีบุตรยากเบื้องต้น อัลตราซาวด์ ติดตามไข่ วางแผนการมีบุตร และส่งต่อศูนย์เฉพาะทางเมื่อจำเป็น</div>
+        </div>
+        <div class="faq-item bg-white rounded-3xl shadow-card overflow-hidden">
+          <button class="faq-btn w-full p-6 text-left font-extrabold flex justify-between gap-4">ควรมาพบแพทย์เมื่อไร?<span>+</span></button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 leading-8">หากพยายามมีบุตรแล้วยังไม่สำเร็จ หรือมีรอบเดือนผิดปกติ ปวดประจำเดือนมาก เคยผ่าตัดอุ้งเชิงกราน มีโรคประจำตัว หรืออายุ 35 ปีขึ้นไป ควรมาปรึกษาเร็วขึ้น</div>
+        </div>
+        <div class="faq-item bg-white rounded-3xl shadow-card overflow-hidden">
+          <button class="faq-btn w-full p-6 text-left font-extrabold flex justify-between gap-4">ต้องพาคู่สมรสมาด้วยไหม?<span>+</span></button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 leading-8">แนะนำให้มาด้วยกัน เพราะภาวะมีบุตรยากอาจเกี่ยวข้องกับทั้งฝ่ายหญิงและฝ่ายชาย การประเมินคู่สมรสพร้อมกันช่วยให้ทราบแนวทางได้เร็วขึ้น</div>
+        </div>
+        <div class="faq-item bg-white rounded-3xl shadow-card overflow-hidden">
+          <button class="faq-btn w-full p-6 text-left font-extrabold flex justify-between gap-4">ตรวจครั้งแรกต้องเตรียมอะไร?<span>+</span></button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 leading-8">เตรียมข้อมูลรอบเดือน วันแรกของประจำเดือนครั้งล่าสุด ผลตรวจเดิม ยาที่ใช้ประจำ ประวัติโรค/การผ่าตัด และข้อมูลฝ่ายชาย หากมีผลตรวจน้ำเชื้อเดิมให้นำมาด้วย</div>
+        </div>
+        <div class="faq-item bg-white rounded-3xl shadow-card overflow-hidden">
+          <button class="faq-btn w-full p-6 text-left font-extrabold flex justify-between gap-4">รับประกันว่าจะตั้งครรภ์ไหม?<span>+</span></button>
+          <div class="faq-content hidden px-6 pb-6 text-slate-600 leading-8">ไม่สามารถรับประกันผลการตั้งครรภ์ได้ เพราะขึ้นกับหลายปัจจัย เช่น อายุ การตกไข่ คุณภาพไข่ คุณภาพน้ำเชื้อ ท่อนำไข่ มดลูก โรคร่วม และปัจจัยอื่น ๆ คลินิกจะช่วยประเมิน วางแผน และส่งต่อเมื่อเหมาะสม</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section id="booking" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10 items-start">
+      <div class="bg-rose-900 text-white rounded-[2.5rem] p-8 md:p-10 shadow-soft">
+        <p class="font-bold text-rose-100">เริ่มต้นง่าย ๆ</p>
+        <h2 class="mt-2 text-3xl md:text-4xl font-extrabold">นัดปรึกษาเพื่อวางแผนมีบุตร</h2>
+        <p class="mt-5 text-rose-50 leading-8">ทีมคลินิกจะติดต่อกลับเพื่อยืนยันวันเวลาและแนะนำการเตรียมตัวก่อนพบแพทย์</p>
+        <div class="mt-8 space-y-4">
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center">📞</div>
+            <div><p class="font-bold">โทร</p><p class="text-rose-50">0XX-XXX-XXXX</p></div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center">💬</div>
+            <div><p class="font-bold">LINE OA</p><p class="text-rose-50">@yourclinic</p></div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center">📍</div>
+            <div><p class="font-bold">ที่ตั้ง</p><p class="text-rose-50">ระบุที่อยู่คลินิกของคุณที่นี่</p></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="appointmentForm" class="bg-white rounded-[2.5rem] p-6 md:p-8 shadow-card border border-white">
+        <h3 class="text-2xl font-extrabold">แบบฟอร์มนัดหมายเบื้องต้น</h3>
+        <p class="mt-2 text-sm text-slate-500">กรอกข้อมูลเพื่อให้เจ้าหน้าที่ติดต่อกลับ ข้อมูลจะถูกบันทึกใน Firebase Realtime Database</p>
+        <div class="mt-6 grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-bold mb-2">ชื่อ-นามสกุล</label>
+            <input id="bookingFullName" name="fullName" required autocomplete="name" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" placeholder="ชื่อผู้รับบริการ" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">เบอร์โทร</label>
+            <input id="bookingPhone" name="phone" type="tel" required autocomplete="tel" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" placeholder="08X-XXX-XXXX" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">อายุฝ่ายหญิง</label>
+            <input id="bookingFemaleAge" name="femaleAge" type="number" min="18" max="55" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" placeholder="เช่น 34" />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2">พยายามมีบุตรกี่เดือน</label>
+            <input id="bookingTryingMonths" name="tryingMonths" type="number" min="0" max="120" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" placeholder="เช่น 8" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-bold mb-2">บริการที่สนใจ</label>
+            <select id="bookingServiceInterest" name="serviceInterest" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100">
+              <option>ปรึกษาวางแผนมีบุตร</option>
+              <option>ตรวจประเมินคู่สมรส</option>
+              <option>ติดตามการตกไข่</option>
+              <option>ตรวจสุขภาพก่อนตั้งครรภ์</option>
+              <option>ต้องการให้เจ้าหน้าที่ช่วยแนะนำ</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-bold mb-2">ข้อความเพิ่มเติม</label>
+            <textarea id="bookingMessage" name="message" rows="4" class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-rose-100" placeholder="เช่น ประจำเดือนผิดปกติ เคยตรวจมาก่อน มีผลตรวจเดิม"></textarea>
+          </div>
+        </div>
+        <button id="bookingSubmit" type="submit" class="mt-6 w-full px-5 py-4 rounded-2xl bg-rose-700 text-white font-extrabold hover:bg-rose-800 transition disabled:cursor-not-allowed disabled:bg-slate-400">ส่งข้อมูลนัดหมาย</button>
+        <p id="bookingStatus" class="hidden mt-4 rounded-2xl px-4 py-3 text-sm font-semibold leading-6" role="status"></p>
+        <p class="mt-4 text-xs text-slate-500 leading-6">การส่งข้อมูลนี้ยังไม่ถือเป็นการยืนยันนัดหมาย เจ้าหน้าที่จะติดต่อกลับเพื่อยืนยันอีกครั้ง</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="pb-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="rounded-[2rem] bg-amber-50 border border-amber-100 p-6 md:p-8 text-amber-900">
+        <h3 class="font-extrabold text-lg">หมายเหตุสำคัญ</h3>
+        <p class="mt-2 text-sm leading-7">ข้อมูลในหน้านี้เป็นข้อมูลทั่วไปเพื่อการให้บริการและการเตรียมตัว ไม่แทนการวินิจฉัยหรือการรักษาเฉพาะบุคคล ผลลัพธ์ด้านการตั้งครรภ์แตกต่างกันในแต่ละราย คลินิกไม่รับประกันผลการตั้งครรภ์ และจะพิจารณาส่งต่อศูนย์เฉพาะทางเมื่อจำเป็น</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-rose-950 text-white py-10">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <p class="font-extrabold text-xl">คลินิกส่งเสริมการมีบุตร</p>
+        <p class="mt-2 text-rose-100 text-sm">ดูแลด้วยความเข้าใจ วางแผนอย่างเป็นระบบ ส่งต่อเมื่อเหมาะสม</p>
+      </div>
+      <div class="text-sm text-rose-100 md:text-right">
+        <p>โทร: 0XX-XXX-XXXX</p>
+        <p>LINE: @yourclinic</p>
+        <p>เวลาเปิดบริการ: ระบุวันและเวลาที่นี่</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    document.querySelectorAll('.faq-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const icon = btn.querySelector('span');
+        content.classList.toggle('hidden');
+        icon.textContent = content.classList.contains('hidden') ? '+' : '−';
+      });
+    });
+
+    document.getElementById('checkBtn').addEventListener('click', () => {
+      const age = Number(document.getElementById('ageInput').value);
+      const months = Number(document.getElementById('monthInput').value);
+      const resultBox = document.getElementById('resultBox');
+      let msg = '';
+
+      if (!age || !months && months !== 0) {
+        msg = 'กรุณากรอกอายุและจำนวนเดือนที่พยายามมีบุตร เพื่อประเมินเบื้องต้น';
+      } else if (age >= 40) {
+        msg = 'แนะนำให้ปรึกษาแพทย์เร็ว เพราะอายุ 40 ปีขึ้นไปควรประเมินภาวะเจริญพันธุ์และวางแผนอย่างใกล้ชิด';
+      } else if (age >= 35 && months >= 6) {
+        msg = 'แนะนำให้มาปรึกษาแพทย์ เนื่องจากอายุ 35 ปีขึ้นไปและพยายามมีบุตรมาอย่างน้อย 6 เดือนแล้ว';
+      } else if (age < 35 && months >= 12) {
+        msg = 'แนะนำให้มาปรึกษาแพทย์ เนื่องจากพยายามมีบุตรมาอย่างน้อย 12 เดือนแล้ว';
+      } else {
+        msg = 'ยังสามารถเริ่มจากการปรึกษาเพื่อวางแผนก่อนตั้งครรภ์ ตรวจสุขภาพ และเรียนรู้ช่วง fertile window ได้ โดยเฉพาะหากมีรอบเดือนผิดปกติหรือโรคประจำตัว';
+      }
+
+      resultBox.textContent = msg;
+      resultBox.classList.remove('hidden');
+    });
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDUcwd_8TYrJzYK6ole3FmGOy68HiYS0SY",
+      authDomain: "fir-host-409cc.firebaseapp.com",
+      databaseURL: "https://fir-host-409cc-default-rtdb.firebaseio.com",
+      projectId: "fir-host-409cc",
+      storageBucket: "fir-host-409cc.firebasestorage.app",
+      messagingSenderId: "722995410827",
+      appId: "1:722995410827:web:6c665c22b6d9694ff5a18e",
+      measurementId: "G-F94TL1QJ9P"
+    };
+
+    const appointmentForm = document.getElementById('appointmentForm');
+    const bookingSubmit = document.getElementById('bookingSubmit');
+    const bookingStatus = document.getElementById('bookingStatus');
+
+    const setBookingStatus = (type, message) => {
+      bookingStatus.textContent = message;
+      bookingStatus.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'bg-rose-50', 'text-rose-800', 'bg-amber-50', 'text-amber-800');
+
+      if (type === 'success') {
+        bookingStatus.classList.add('bg-emerald-50', 'text-emerald-800');
+      } else if (type === 'warning') {
+        bookingStatus.classList.add('bg-amber-50', 'text-amber-800');
+      } else {
+        bookingStatus.classList.add('bg-rose-50', 'text-rose-800');
+      }
+    };
+
+    const toNumberOrNull = (value) => {
+      if (value === null || value === '') return null;
+      const number = Number(value);
+      return Number.isNaN(number) ? null : number;
+    };
+
+    if (appointmentForm) {
+      if (window.firebase && typeof firebase.database === 'function') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+
+        const database = firebase.database();
+
+        appointmentForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(appointmentForm);
+          const payload = {
+            fullName: String(formData.get('fullName') || '').trim(),
+            phone: String(formData.get('phone') || '').trim(),
+            femaleAge: toNumberOrNull(formData.get('femaleAge')),
+            tryingMonths: toNumberOrNull(formData.get('tryingMonths')),
+            serviceInterest: String(formData.get('serviceInterest') || '').trim(),
+            message: String(formData.get('message') || '').trim(),
+            source: 'website',
+            status: 'new',
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
+            createdAtIso: new Date().toISOString()
+          };
+
+          bookingSubmit.disabled = true;
+          bookingSubmit.textContent = 'กำลังส่งข้อมูล...';
+          setBookingStatus('warning', 'กำลังบันทึกข้อมูลนัดหมาย กรุณารอสักครู่');
+
+          try {
+            await database.ref('appointments').push(payload);
+            appointmentForm.reset();
+            setBookingStatus('success', 'ส่งข้อมูลเรียบร้อยแล้ว เจ้าหน้าที่จะติดต่อกลับเพื่อยืนยันนัดหมาย');
+          } catch (error) {
+            console.error('Firebase appointment submit error:', error);
+            setBookingStatus('error', 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อหรือสิทธิ์การเขียนของ Firebase Realtime Database');
+          } finally {
+            bookingSubmit.disabled = false;
+            bookingSubmit.textContent = 'ส่งข้อมูลนัดหมาย';
+          }
+        });
+      } else {
+        appointmentForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          setBookingStatus('error', 'ไม่สามารถโหลด Firebase SDK ได้ กรุณาตรวจสอบอินเทอร์เน็ตหรือ CDN');
+        });
+      }
+    }
+  </script>
+</body>
+</html>
