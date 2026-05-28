@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>คลินิกส่งเสริมการมีบุตร | วางแผนมีลูกอย่างมั่นใจ</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -579,15 +581,33 @@
 
           bookingSubmit.disabled = true;
           bookingSubmit.textContent = 'กำลังส่งข้อมูล...';
-          setBookingStatus('warning', 'กำลังบันทึกข้อมูลนัดหมาย กรุณารอสักครู่');
+          
+          Swal.fire({
+            title: 'กำลังส่งข้อมูล',
+            text: 'กรุณารอสักครู่...',
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
 
           try {
             await database.ref('appointments').push(payload);
             appointmentForm.reset();
-            setBookingStatus('success', 'ส่งข้อมูลเรียบร้อยแล้ว เจ้าหน้าที่จะติดต่อกลับเพื่อยืนยันนัดหมาย');
+            Swal.fire({
+              title: 'สำเร็จ!',
+              text: 'ส่งข้อมูลเรียบร้อยแล้ว เจ้าหน้าที่จะติดต่อกลับเพื่อยืนยันนัดหมาย',
+              icon: 'success',
+              confirmButtonColor: '#be185d',
+            });
           } catch (error) {
             console.error('Firebase appointment submit error:', error);
-            setBookingStatus('error', 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่อหรือสิทธิ์การเขียนของ Firebase Realtime Database');
+            Swal.fire({
+              title: 'เกิดข้อผิดพลาด',
+              text: 'ส่งข้อมูลไม่สำเร็จ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+              icon: 'error',
+              confirmButtonColor: '#be185d',
+            });
           } finally {
             bookingSubmit.disabled = false;
             bookingSubmit.textContent = 'ส่งข้อมูลนัดหมาย';
