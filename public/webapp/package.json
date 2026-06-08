@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "choke",
+=======
+  "name": "webapp",
+>>>>>>> 244a4f70b3f8d376f02d112bce780093f6a34180
   "version": "1.0.0",
   "description": "",
   "license": "ISC",

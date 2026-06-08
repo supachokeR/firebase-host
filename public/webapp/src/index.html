@@ -3,373 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Member Management CRUD</title>
+    <title>Firebase Member & LINE Bot Management</title>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #f8fafc;
-            --accent-color: #3b82f6;
-            --text-dark: #1e293b;
-            --text-light: #64748b;
-            --white: #ffffff;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --danger: #ef4444;
-            --success: #22c55e;
-            --warning: #f59e0b;
-        }
-
+        :root { --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; --white: #ffffff; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Prompt', sans-serif;
-            background-color: var(--secondary-color);
-            color: var(--text-dark);
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            background-image: radial-gradient(circle at top right, #e2e8f0 0%, transparent 40%),
-                              radial-gradient(circle at bottom left, #e2e8f0 0%, transparent 40%);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background-color: var(--white);
-            padding: 2.5rem;
-            border-radius: 1.5rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease;
-        }
-
-        h1 { font-size: 1.875rem; font-weight: 600; margin-bottom: 1.5rem; text-align: center; color: var(--primary-color); }
-
-        .form-group { margin-bottom: 1.25rem; }
-        label { display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-dark); }
-        input[type="text"], input[type="email"], input[type="file"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.75rem;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: all 0.2s;
-        }
-        input:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            font-size: 1rem;
-        }
-        .btn:hover { background-color: var(--accent-color); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
-        .btn:active { transform: translateY(0); }
-        .btn-danger { background-color: var(--danger); }
-        .btn-danger:hover { background-color: #dc2626; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
-        .btn-warning { background-color: var(--warning); }
-        .btn-warning:hover { background-color: #d97706; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2); }
-        .btn-secondary { background-color: var(--text-light); }
-        .btn-secondary:hover { background-color: #475569; }
-
-        .table-container { overflow-x: auto; margin-top: 1rem; }
-        table { width: 100%; border-collapse: collapse; min-width: 600px; }
-        th, td { padding: 1.25rem 1rem; text-align: left; border-bottom: 1px solid #f1f5f9; }
-        th { background-color: #f8fafc; font-weight: 600; color: var(--text-light); text-transform: uppercase; font-size: 0.875rem; letter-spacing: 0.05em; }
-        tr:hover { background-color: #f8fafc; }
-        
-        .action-btns { display: flex; gap: 0.5rem; }
-        
-        .loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9);
-            display: none; justify-content: center; align-items: center; z-index: 1000;
-            flex-direction: column;
-        }
-
-        .spinner {
-            width: 50px; height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .file-link { color: var(--primary-color); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.25rem; }
-        .file-link:hover { text-decoration: underline; }
-
-        #imagePreview { max-width: 150px; max-height: 150px; margin-top: 1rem; display: none; border-radius: 0.75rem; box-shadow: var(--shadow); border: 2px solid #fff; }
-        
-        .empty-state { text-align: center; padding: 3rem; color: var(--text-light); }
+        body { font-family: 'Prompt', sans-serif; background-color: var(--bg); color: var(--text); padding: 2rem 1rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--white); padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+        h1 { text-align: center; margin-bottom: 1.5rem; color: var(--primary); }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+        input { width: 100%; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; }
+        .btn { width: 100%; padding: 0.75rem; border: none; border-radius: 0.5rem; background: var(--primary); color: white; font-weight: 600; cursor: pointer; margin-top: 1rem; }
+        .btn-danger { background: #ef4444; width: auto; padding: 0.4rem 0.8rem; }
+        .btn-warning { background: #f59e0b; width: auto; padding: 0.4rem 0.8rem; margin-right: 0.5rem; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        th { background: #f1f5f9; font-weight: 600; }
+        .loading { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); display:none; justify-content:center; align-items:center; z-index:1000; }
+        .uuid-badge { font-family: monospace; background: #f1f5f9; padding: 2px 4px; border-radius: 4px; font-size: 11px; color: #475569; }
     </style>
 </head>
 <body>
-    <div id="loading" class="loading-overlay">
-        <div class="spinner"></div>
-        <p style="font-weight: 600;">กำลังดำเนินการ...</p>
-    </div>
+    <div id="loading" class="loading"><div>กำลังประมวลผล...</div></div>
 
     <div class="container">
-        <!-- Form Card -->
         <div class="card">
-            <h1 id="formTitle">สมัครสมาชิกใหม่</h1>
+            <h1 id="formTitle">จัดการสมาชิกและ LINE Bot</h1>
             <form id="memberForm">
                 <input type="hidden" id="memberId">
                 <input type="hidden" id="oldFileId">
-                <input type="hidden" id="oldFileUrl">
+                <input type="hidden" id="currentUuid">
                 
-                <div class="form-group">
-                    <label for="name">ชื่อ-นามสกุล</label>
-                    <input type="text" id="name" required placeholder="กรอกชื่อและนามสกุลของคุณ">
-                </div>
-                
-                <div class="form-group">
-                    <label for="email">อีเมล</label>
-                    <input type="email" id="email" required placeholder="example@email.com">
-                </div>
-                
-                <div class="form-group">
-                    <label for="file">อัปโหลดไฟล์ (รูปภาพ หรือ PDF)</label>
-                    <input type="file" id="file" accept="image/*,application/pdf">
-                    <img id="imagePreview" src="" alt="Preview">
-                    <div id="currentFile" style="margin-top: 1rem; font-size: 0.875rem; padding: 0.5rem; background: #eff6ff; border-radius: 0.5rem; display: none;">
-                        <strong>ไฟล์ปัจจุบัน:</strong> <span id="currentFileName"></span>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label>ชื่อ-นามสกุล</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>อีเมล</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Keyword</label>
+                        <input type="text" id="keyword" required placeholder="เช่น เมนู1">
+                    </div>
+                    <div class="form-group">
+                        <label>ไฟล์รูปภาพ</label>
+                        <input type="file" id="file" accept="image/*">
                     </div>
                 </div>
-
-                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                    <button type="submit" class="btn" id="submitBtn" style="flex: 1;">บันทึกข้อมูล</button>
-                    <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">ยกเลิก</button>
-                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">บันทึกข้อมูลสมาชิก</button>
+                <button type="button" class="btn" id="cancelBtn" style="background:#64748b; display:none;">ยกเลิก</button>
             </form>
         </div>
 
-        <!-- List Card -->
-        <div class="card" style="padding: 1.5rem;">
+        <div class="card">
             <h1>รายชื่อสมาชิกทั้งหมด</h1>
-            <div class="table-container">
+            <div style="overflow-x:auto">
                 <table>
                     <thead>
                         <tr>
-                            <th>ชื่อ-นามสกุล</th>
+                            <th>UUID</th>
+                            <th>ชื่อ</th>
                             <th>อีเมล</th>
-                            <th>ไฟล์แนบ</th>
-                            <th style="width: 180px;">จัดการ</th>
+                            <th>Keyword</th>
+                            <th>ไฟล์</th>
+                            <th>จัดการ</th>
                         </tr>
                     </thead>
-                    <tbody id="memberList">
-                        <!-- Data will be loaded here -->
-                    </tbody>
+                    <tbody id="memberList"></tbody>
                 </table>
             </div>
         </div>
     </div>
 
     <script>
+        const firebaseConfig = <?!= JSON.stringify(firebaseConfig) ?>;
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         const form = document.getElementById('memberForm');
-        const loading = document.getElementById('loading');
         const memberList = document.getElementById('memberList');
-        const fileInput = document.getElementById('file');
-        const imagePreview = document.getElementById('imagePreview');
-        
-        let allRecords = [];
+        const loading = document.getElementById('loading');
+        let allData = {};
 
-        // Initial Load
-        window.onload = loadRecords;
-
-        // Image Preview Handler
-        fileInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            } else {
-                imagePreview.style.display = 'none';
-            }
+        db.ref('members').on('value', (snapshot) => {
+            allData = snapshot.val();
+            renderTable(allData);
         });
 
-        function loadRecords() {
-            showLoading(true);
-            google.script.run
-                .withSuccessHandler(records => {
-                    allRecords = records;
-                    renderTable(records);
-                    showLoading(false);
-                })
-                .withFailureHandler(err => {
-                    Swal.fire('ข้อผิดพลาด', err.message, 'error');
-                    showLoading(false);
-                })
-                .getRecords();
-        }
-
-        function renderTable(records) {
+        function renderTable(data) {
             memberList.innerHTML = '';
-            // Defensive check for null or undefined records
-            if (!records || !Array.isArray(records) || records.length === 0) {
-                memberList.innerHTML = '<tr><td colspan="4" class="empty-state">ไม่พบข้อมูลสมาชิกในระบบ</td></tr>';
+            if (!data) {
+                memberList.innerHTML = '<tr><td colspan="6" style="text-align:center">ไม่มีข้อมูล</td></tr>';
                 return;
             }
-
-            records.forEach(record => {
+            Object.keys(data).forEach(key => {
+                const item = data[key];
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td style="font-weight: 600;">${record.name}</td>
-                    <td>${record.email}</td>
+                    <td><span class="uuid-badge">${item.uuid || '-'}</span></td>
+                    <td>${item.name}</td>
+                    <td>${item.email}</td>
+                    <td><span style="background:#dcfce7; color:#166534; padding:2px 8px; border-radius:4px;">${item.keyword || '-'}</span></td>
+                    <td>${item.fileUrl ? `<a href="${item.fileUrl}" target="_blank">ดูรูป</a>` : '-'}</td>
                     <td>
-                        ${record.fileurl ? `
-                            <a href="${record.fileurl}" target="_blank" class="file-link">
-                                <svg style="width:16px;height:16px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                                ดูไฟล์
-                            </a>` : '<span style="color:#cbd5e1">ไม่มีไฟล์</span>'}
-                    </td>
-                    <td class="action-btns">
-                        <button class="btn btn-warning" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="editRecord('${record.id}')">แก้ไข</button>
-                        <button class="btn btn-danger" style="padding: 0.5rem 1rem; font-size: 0.875rem;" onclick="confirmDelete('${record.id}')">ลบ</button>
+                        <button class="btn-warning" onclick="editRecord('${key}')">แก้ไข</button>
+                        <button class="btn-danger" onclick="deleteRecord('${key}', '${item.fileId}')">ลบ</button>
                     </td>
                 `;
                 memberList.appendChild(tr);
             });
         }
 
-        form.onsubmit = function(e) {
+        form.onsubmit = async (e) => {
             e.preventDefault();
-            const file = fileInput.files[0];
-            const data = {
-                id: document.getElementById('memberId').value,
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                oldFileId: document.getElementById('oldFileId').value,
-                oldFileUrl: document.getElementById('oldFileUrl').value
-            };
+            showLoading(true);
+            
+            const id = document.getElementById('memberId').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const keyword = document.getElementById('keyword').value;
+            const file = document.getElementById('file').files[0];
+            const oldFileId = document.getElementById('oldFileId').value;
+            let uuid = document.getElementById('currentUuid').value;
+
+            // Generate UUID if new record
+            if (!id && !uuid) {
+                try {
+                    uuid = await new Promise((resolve, reject) => {
+                        google.script.run.withSuccessHandler(resolve).withFailureHandler(reject).getServerUuid();
+                    });
+                } catch (err) {
+                    uuid = 'gen-' + Date.now(); // Fallback
+                }
+            }
+
+            let fileInfo = { fileId: oldFileId || '', fileUrl: id && allData[id] ? allData[id].fileUrl : '' };
 
             if (file) {
-                // Check file size (limit to 10MB for GAS base64)
-                if (file.size > 10 * 1024 * 1024) {
-                    Swal.fire('ไฟล์ใหญ่เกินไป', 'กรุณาอัปโหลดไฟล์ขนาดไม่เกิน 10MB', 'warning');
+                try {
+                    const base64 = await toBase64(file);
+                    fileInfo = await new Promise((resolve, reject) => {
+                        google.script.run
+                            .withSuccessHandler(resolve)
+                            .withFailureHandler(reject)
+                            .uploadFile(base64, file.name, file.type, oldFileId);
+                    });
+                } catch (err) {
+                    Swal.fire('Error', 'อัปโหลดไม่สำเร็จ: ' + err.message, 'error');
+                    showLoading(false);
                     return;
                 }
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    data.fileData = e.target.result;
-                    data.fileName = file.name;
-                    data.fileType = file.type;
-                    submitData(data);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                submitData(data);
             }
+
+            const memberData = {
+                uuid: uuid,
+                name: name,
+                email: email,
+                keyword: keyword,
+                fileId: fileInfo.fileId,
+                fileUrl: fileInfo.fileUrl,
+                updatedAt: firebase.database.ServerValue.TIMESTAMP
+            };
+
+            const targetId = id || db.ref().child('members').push().key;
+            db.ref('members/' + targetId).update(memberData).then(() => {
+                Swal.fire('สำเร็จ', 'บันทึกข้อมูลเรียบร้อย (UUID: ' + uuid + ')', 'success');
+                form.reset();
+                resetForm();
+                showLoading(false);
+            }).catch(err => {
+                Swal.fire('Error', err.message, 'error');
+                showLoading(false);
+            });
         };
 
-        function submitData(data) {
-            showLoading(true);
-            google.script.run
-                .withSuccessHandler(res => {
-                    Swal.fire({
-                        title: 'สำเร็จ!',
-                        html: `ข้อมูลสมาชิกถูกบันทึกเรียบร้อยแล้ว<br><br><a href="${res.sheetUrl}" target="_blank" style="color: #2563eb; text-decoration: underline;">คลิกเพื่อดูไฟล์ฐานข้อมูล (Google Sheets)</a>`,
-                        icon: 'success',
-                        confirmButtonText: 'ตกลง',
-                        confirmButtonColor: '#2563eb'
-                    });
-                    form.reset();
-                    resetFormState();
-                    loadRecords();
-                })
-                .withFailureHandler(err => {
-                    Swal.fire('เกิดข้อผิดพลาด', err.message, 'error');
-                    showLoading(false);
-                })
-                .saveRecord(data);
-        }
-
         function editRecord(id) {
-            const record = allRecords.find(r => r.id === id);
-            if (!record) return;
-
-            document.getElementById('memberId').value = record.id;
-            document.getElementById('name').value = record.name;
-            document.getElementById('email').value = record.email;
-            document.getElementById('oldFileId').value = record.fileid || '';
-            document.getElementById('oldFileUrl').value = record.fileurl || '';
-            
+            const item = allData[id];
+            document.getElementById('memberId').value = id;
+            document.getElementById('currentUuid').value = item.uuid || '';
+            document.getElementById('name').value = item.name;
+            document.getElementById('email').value = item.email;
+            document.getElementById('keyword').value = item.keyword || '';
+            document.getElementById('oldFileId').value = item.fileId || '';
             document.getElementById('formTitle').innerText = 'แก้ไขข้อมูลสมาชิก';
-            document.getElementById('submitBtn').innerText = 'บันทึกการแก้ไข';
-            document.getElementById('cancelBtn').style.display = 'inline-block';
-            
-            if (record.fileurl) {
-                document.getElementById('currentFile').style.display = 'block';
-                document.getElementById('currentFileName').innerHTML = `<a href="${record.fileurl}" target="_blank" class="file-link">คลิกเพื่อดูไฟล์เดิม</a>`;
-            }
-            
+            document.getElementById('cancelBtn').style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function resetFormState() {
+        function deleteRecord(id, fileId) {
+            Swal.fire({ title: 'ยืนยันการลบ?', icon: 'warning', showCancelButton: true }).then(res => {
+                if (res.isConfirmed) {
+                    showLoading(true);
+                    db.ref('members/' + id).remove().then(() => {
+                        if (fileId) google.script.run.deleteDriveFile(fileId);
+                        showLoading(false);
+                        Swal.fire('ลบแล้ว', '', 'success');
+                    });
+                }
+            });
+        }
+
+        function resetForm() {
             document.getElementById('memberId').value = '';
             document.getElementById('oldFileId').value = '';
-            document.getElementById('oldFileUrl').value = '';
-            document.getElementById('formTitle').innerText = 'สมัครสมาชิกใหม่';
-            document.getElementById('submitBtn').innerText = 'บันทึกข้อมูล';
+            document.getElementById('currentUuid').value = '';
+            document.getElementById('formTitle').innerText = 'จัดการสมาชิกและ LINE Bot';
             document.getElementById('cancelBtn').style.display = 'none';
-            document.getElementById('currentFile').style.display = 'none';
-            imagePreview.style.display = 'none';
-            fileInput.value = '';
         }
+        document.getElementById('cancelBtn').onclick = resetForm;
 
-        document.getElementById('cancelBtn').onclick = resetFormState;
-
-        function confirmDelete(id) {
-            Swal.fire({
-                title: 'ยืนยันการลบ?',
-                text: "ข้อมูลสมาชิกและไฟล์แนบใน Google Drive จะถูกลบถาวร",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#ef4444',
-                cancelButtonColor: '#64748b',
-                confirmButtonText: 'ยืนยัน ลบข้อมูล',
-                cancelButtonText: 'ยกเลิก'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    deleteData(id);
-                }
-            })
+        function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
         }
-
-        function deleteData(id) {
-            showLoading(true);
-            google.script.run
-                .withSuccessHandler(res => {
-                    Swal.fire('ลบข้อมูลแล้ว!', 'ข้อมูลสมาชิกถูกนำออกจากระบบแล้ว', 'success');
-                    loadRecords();
-                })
-                .withFailureHandler(err => {
-                    Swal.fire('เกิดข้อผิดพลาด', err.message, 'error');
-                    showLoading(false);
-                })
-                .deleteRecord(id);
-        }
-
-        function showLoading(show) {
-            loading.style.display = show ? 'flex' : 'none';
-        }
+        function showLoading(show) { loading.style.display = show ? 'flex' : 'none'; }
     </script>
 </body>
 </html>
